@@ -1,5 +1,6 @@
 use rayon::prelude::*;
 use serde::Serialize;
+use std::time::Instant;
 
 #[derive(Serialize)]
 struct Primes {
@@ -32,6 +33,7 @@ fn sieve(n: u32) -> Vec<u32> {
 }
 
 fn main() {
+    let start_time = Instant::now();
     let end_day = 2500000;
 
     let primes = sieve(end_day);
@@ -55,4 +57,7 @@ fn main() {
             )
             .unwrap();
         });
+
+    let duration = start_time.elapsed();
+    println!("Time elapsed: {:?}", duration);
 }
